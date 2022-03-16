@@ -1,0 +1,98 @@
+﻿<Window x:Class="GUI.View.BoardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View"
+        mc:Ignorable="d"
+        Title="BoardWindow" WindowState= "Maximized">
+
+
+    <Grid Margin="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="204*"/>
+            <ColumnDefinition Width="517*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Vertical" Margin="-17,-41,-9.666,10" Grid.ColumnSpan="2" Grid.Row="2">
+            <Label Content="{Binding Path=Title, Mode=OneWay}" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold" Foreground="Black" Grid.Row="0"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Filter keywords:" FontSize="16" Grid.Column="0" Grid.Row="1" />
+                <TextBox x:Name="FilterKeywords" Grid.Column="1" Grid.Row="1" Text="{Binding Path=FilterKeywords}"/>
+                <Button x:Name="FilterButton" Content="Filter" Margin="5" FontSize="16" Width="80" Grid.Column="2" Grid.Row="1" Click="FilterButton_Click"/>
+            </Grid>
+            <Grid>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <ListBox x:Name="Columns" ItemsSource="{Binding Path=user.Board.Columns, Mode=TwoWay}" VerticalContentAlignment= "Center" >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" MinWidth="200" MaxWidth="200" MinHeight="300" MaxHeight="300">
+                                    <StackPanel>
+                                        <Label Content="{Binding Path=ColumnName, Mode=TwoWay}" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center"/>
+                                        <ListBox x:Name="Tasks" Height="300" ItemsSource="{Binding Path=tasks}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"  Background="{Binding Path=TaskColor}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="{Binding Path=TaskBorderColor}" BorderThickness="2">
+                                                        <StackPanel Background="{Binding Path=TaskBackgroundColor}" MouseLeftButtonDown="Tasks_MouseDoubleClick" >
+                                                            <Label Content="{Binding Path=Title}"/>
+                                                            <Label Content="{Binding Path=DueDate}"/>
+                                                            <Label Content="{Binding Path=EmailAsignee}"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </StackPanel>
+
+            </Grid>
+            <Grid Height="170">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="135.2"/>
+                    <ColumnDefinition Width="135.2"/>
+                    <ColumnDefinition Width="126.4"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                </Grid.RowDefinitions>
+                <Button Content="Sort Tasks" x:Name="sort" Margin="20,20,140.6,20.2" FontSize="16" Grid.Row="0" Grid.Column="0" Click="sort_Click" Grid.ColumnSpan="2" />
+                <Button Content="Add Task" x:Name="AddTask" Margin="20.2,20,20.6,20.2" FontSize="16" Grid.Row="0" Grid.Column="1" Click="AddTask_Click"/>
+                <Button Content="Limit Tasks" x:Name="LimitTasks" Margin="10.4,20,9.6,20.2" FontSize="16" Grid.Row="0" Grid.Column="2" Click="LimitTasks_Click" />
+                <Button Content="Add Column" x:Name="AddColumn" Margin="20,19.8,0.8,19.4" FontSize="16" Grid.Row="1" Grid.Column="0" Click="addColumn_Click" />
+                <Button Content="Logout" x:Name="Logout" Margin="25.4,19.8,10.8,20.4" FontSize="16" Grid.Row="1" Grid.Column="4" Click="Logout_Click"/>
+                <Button Content="Move Left" x:Name="MoveLeft" Margin="20.2,19.8,20.6,20.4" FontSize="16" Grid.Row="1" Grid.Column="1" Click="moveLeft_Click"/>
+                <Button Content="Move Right" x:Name="MoveRight" Margin="10.4,19.8,9.6,20.4" FontSize="16" Grid.Row="1" Grid.Column="2" Click="moveRight_Click"/>
+                <Button Content="Delete Column" x:Name="Delete" Margin="10.4,19.8,9.6,20.4" FontSize="16" Grid.Row="1" Grid.Column="3" Click="deleteColumn_Click"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,335,10.333,0.333" Grid.RowSpan="2">
+            <Label Content="{Binding Message, Mode=OneWay}" Foreground="Red" HorizontalAlignment="Center" Margin="56,16,55.8,15.2" Width="9"/>
+        </StackPanel>
+    </Grid>
+</Window>

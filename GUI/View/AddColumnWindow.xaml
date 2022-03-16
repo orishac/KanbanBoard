@@ -1,0 +1,38 @@
+﻿<Window x:Class="GUI.View.AddColumnWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View"
+        mc:Ignorable="d"
+        Title="AddColumnWindow" Height="308.648" Width="483.342">
+    <Grid Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Column ID" Grid.Column="0" Grid.Row="0" Margin="0,0,10,10"/>
+            <TextBox Text="{Binding Path=ColumnID, Mode=OneWayToSource}" Grid.Row="0" Grid.Column="1" Margin="10,0,-0.333,10"/>
+            <Label Content="Column Name" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.496,3.244" Grid.Column="0" Grid.Row="1"/>
+            <TextBox Text="{Binding Path=ColumnName, Mode=OneWayToSource}" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="10,0,-0.333,10"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Content="Apply" x:Name="Apply" Margin="10" FontSize="16" Width="80" Click="Apply_Click" HorizontalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Label Content="{Binding Message, Mode=OneWay}" HorizontalAlignment="Left" Height="50" Margin="0,0,-0.333,0" Width="377"  /> 
+        </StackPanel>
+       
+    </Grid>
+</Window>
